@@ -1,26 +1,38 @@
 <?php
-//如有第三方插件的自动加载类，也在这里引用执行即可
 
 class ClassLoader
 {
+    private static $_namespaceArr = array();
 	public static function defaultLoader($className)
 	{
 	    //获取根目录
 	    $dir=dirname(__DIR__);
-	    //将命名空间按斜杠切割，然后再拼装成路径
-	    $classNameArr=explode("\\", $className);
-	    $count=count($classNameArr);
-	    for($i=0;$i<$count;$i++)
+	    
+	    $className=str_replace("\\", "/", $className);
+	    $className=trim($className,"/");
+	    
+	    $classNameArr=explode("/", $className);
+	    $namespace = $classNameArr[0];
+	    
+	    if(array_key_exists($namespace, self::$_namespaceArr))
 	    {
-	    	$dir.="/".$classNameArr[$i];
-	    	
+	    	$dir=self::$_namespaceArr[$namespace];
 	    }
-		$filename=$dir.".php";
+	    
+		$filename=$dir."/".$className.".php";
 		
-		if(is_file($filename))
+	    if(is_file($filename))
 		{
 		  require_once $filename;
 		}
+	}
+	
+	public static function registNamespace($namespace,$filePath)
+	{
+	    if(!empty($namespace) && !empty($filePath))
+	    {
+            self::$_namespaceArr[$namespace]=$filePath;
+	    }
 	}
 }
 
