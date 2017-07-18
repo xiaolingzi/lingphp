@@ -37,3 +37,7 @@ class ClassLoader
 }
 
 spl_autoload_register(array('ClassLoader', 'defaultLoader'));
+
+ClassLoader::registNamespace("LingORM", dirname(__DIR__)."/Plugins");
+ClassLoader::registNamespace("Thrift", dirname(__DIR__)."/Plugins");
+

@@ -1,6 +1,8 @@
 <?php
+require_once 'AppException.php';
 require_once 'Global.php';
 require_once 'ClassLoader.php';
+require_once 'Process.php';
 
 //传入的i的参数值，即执行命令
 $command = "";
@@ -36,4 +38,9 @@ if(php_sapi_name() == "cli")
     }
 }
 
+
+function appStart($configArr)
+{
+	(new Process())->start($configArr);
+}
 

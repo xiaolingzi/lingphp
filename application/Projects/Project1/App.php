@@ -3,14 +3,32 @@ require_once dirname(dirname(__DIR__)).'/APP/BaseApp.php';
 
 use Projects\Project1\Test;
 
-global $command;
+function main()
+{
+    $instance = new Test();
+    $instance->getConfig();
+}
 
-$instance = new Test();
+$processConfig = array();
+global $command;
 switch ($command)
 {
 	case "a":
-	    $instance->getConfig();
+		$processConfig = array(
+            "workFunction"=>"main"
+            ,"daemonize"=>false
+        );
+	    break;
+    case "b":
+	    $processConfig = array(
+            "workFunction"=>"main"
+        	,"workerNumber"=>3
+            ,"daemonize"=>true
+            ,"loopTimespan"=>2
+        );
 	    break;
 	default:
 	    echo "Nothing to do!\n";
 }
+
+appStart($processConfig);
