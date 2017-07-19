@@ -105,7 +105,6 @@ class Process
                 if($loopTimespan<=0)
                 {
                     $this->log($subPID."+++++++++++");
-//                     call_user_func($func);
                     call_user_func_array($func, $parameterArr);
                     exit(0);
                 }
@@ -114,7 +113,6 @@ class Process
                 	$this->log($subPID."-----------".strval($this->_subProcessStatus));
                 	while ($this->_subProcessStatus)
                 	{
-//                 	    call_user_func($func);
                         call_user_func_array($func, $parameterArr);
                 	    pcntl_signal_dispatch();
                 	    sleep($loopTimespan);
@@ -168,7 +166,9 @@ class Process
             fclose(STDOUT);
             fclose(STDERR);
             
-            
+            $STDIN = fopen('/dev/null', 'r');
+            $STDOUT = fopen('/dev/null', 'a');
+            $STDERR = fopen('/dev/null', 'a');
             
             while ($this->_mainProcessStatus)
             {
