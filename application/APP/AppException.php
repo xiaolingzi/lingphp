@@ -2,9 +2,18 @@
 
 class AppException
 {
-	public function LogException($ex)
+	public function LogException($errno,$errstr,$errfile,$errline)
 	{
-	    $exceptionMessage = strval($ex);
+	    $errTypeName = "Notice";
+	    if($errno == E_ERROR)
+	    {
+	    	$errTypeName = "Error";
+	    }
+	    else if($errno == E_WARNING)
+	    {
+	        $errTypeName = "Warning";
+	    }
+	    $exceptionMessage = $errTypeName.":".$errstr."\n in ".$errfile." on ".$errline;
 	    $exceptionMessage = date("Y-m-d H:i:s")."\n".$exceptionMessage."\n\n";
 	    
 	    $filePath=__DIR__."/logs";
@@ -16,8 +25,8 @@ class AppException
 	    $fp=fopen($fileName, "a");
 	    fwrite($fp, $exceptionMessage);
 	    fclose($fp);
-	    throw $ex;
+	    throw $errstr;
 	}
 }
 
-set_exception_handler(array("AppException","LogException"));
+set_error_handler(array("AppException","LogException"));

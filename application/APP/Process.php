@@ -18,11 +18,12 @@ class Process
         $this->initConfig($configArr);
         
         $func = $this->_configArr["workFunction"];
+        $parameterArr = $this->_configArr["parameters"];
         // 如果不支持，则直接运行
         if(! function_exists('pcntl_fork'))
         {
             echo "pcntl_fork not supported, run directly!\n";
-            call_user_func($func);
+            call_user_func_array($func, $parameterArr);
             return;
         }
         
@@ -37,14 +38,14 @@ class Process
         // 如果不是以守护进程运行，就直接单进程运行
         if(! $this->_configArr["daemonize"])
         {
-            call_user_func($func);
+            call_user_func_array($func, $parameterArr);
             return;
         }
         
         // 如果是非cli模式，就直接运行代码
         if(substr(php_sapi_name(), 0, 3) !== 'cli')
         {
-            call_user_func($func);
+            call_user_func_array($func, $parameterArr);
             return;
         }
         
@@ -73,7 +74,7 @@ class Process
         $func = $this->_configArr["workFunction"];
         $workerNumber = $this->_configArr["workerNumber"];
         $loopTimespan = intval($this->_configArr["loopTimespan"]);
-        $parameterArr = intval($this->_configArr["parameters"]);
+        $parameterArr = $this->_configArr["parameters"];
         
         $this->_subProcessStatus = true;
         $this->log($workerNumber." fock start ".$loopTimespan);
@@ -86,7 +87,7 @@ class Process
                 $sid = posix_setsid();
                 if($sid < 0)
                 {
-                    echo "set sid fail,exit!\n";
+                    $this->log("set sid fail,exit!");
                     exit();
                 }
 
@@ -94,9 +95,9 @@ class Process
                 pcntl_signal(SIGUSR2, array(__CLASS__,"subSignalHandler"));
                 
                 // 关闭打开的文件描述符
-                fclose(STDIN);
-                fclose(STDOUT);
-                fclose(STDERR);
+//                 fclose(STDIN);
+//                 fclose(STDOUT);
+//                 fclose(STDERR);
                 
                 // 子进程
                 $subPID=getmypid();
@@ -104,7 +105,8 @@ class Process
                 if($loopTimespan<=0)
                 {
                     $this->log($subPID."+++++++++++");
-                    call_user_func($func);
+//                     call_user_func($func);
+                    call_user_func_array($func, $parameterArr);
                     exit(0);
                 }
                 else 
