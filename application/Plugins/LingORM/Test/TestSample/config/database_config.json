@@ -1,0 +1,20 @@
+{
+	"haviea":{
+		"host":"192.168.18.253",
+		"user":"db_inmotion",
+		"password":"im639()",
+		"database":"haviea",
+		"charset":"utf8mb4",
+        "driver":"pdo_mysql"
+	},
+	"love":{
+        "host":"192.168.18.253",
+        "user":"db_inmotion",
+        "password":"im639()",
+        "database":"love",
+        "charset":"utf8mb4",
+        "driver":"pdo_mysql"
+    }
+}
+
+
