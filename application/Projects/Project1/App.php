@@ -1,5 +1,5 @@
 <?php
-require_once dirname(dirname(__DIR__)).'/APP/BaseApp.php';
+require_once dirname(dirname(__DIR__)).'/App/BaseApp.php';
 
 use Projects\Project1\Test;
 
