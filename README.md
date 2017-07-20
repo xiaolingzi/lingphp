@@ -1,4 +1,4 @@
-# ![xiaolingzi](https://raw.githubusercontent.com/xiaolingzi/LingApp-PHP-Application/master/logo.gif) LingApp php脚本简易框架  
+# ![xiaolingzi](https://raw.githubusercontent.com/xiaolingzi/LingPHP-PHP-Application/master/logo.gif) LingPHP php脚本简易框架  
 更多分享请访问 [https://www.xxling.com](https://www.xxling.com)  
 ## 说明  
   对于web程序，有太多较为成熟的框架可以使用，我们直接拿来用即可。而php除了写web代码之后，还经常用来写一些脚本任务，如服务器部署的一些计划任务程序或者临时使用的处理程序。之前都是大家按自己的想法随便去写，这样会导致代码的凌乱不好管理，另一方面也不便于代码的复用，故开始构建一个简单的框架。  
