@@ -25,7 +25,8 @@ class AppException
 	    $fp=fopen($fileName, "a");
 	    fwrite($fp, $exceptionMessage);
 	    fclose($fp);
-	    throw $errstr;
+	    echo $exceptionMessage;
+	    exit;
 	}
 }
 
