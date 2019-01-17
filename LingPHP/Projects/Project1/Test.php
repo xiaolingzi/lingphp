@@ -5,10 +5,10 @@ use Lib\Utility\IO\ConfigHandler;
 
 class Test
 {
-	public function getConfig()
-	{
-		echo ConfigHandler::getCommonConfigs("a");
-		echo "\n";
-		echo ConfigHandler::getLocalConfigs("a");
-	}
+    public function getConfig()
+    {
+        echo ConfigHandler::getCommonConfig("a");
+        echo "\n";
+        echo ConfigHandler::getLocalConfig("a");
+    }
 }

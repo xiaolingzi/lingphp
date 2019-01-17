@@ -1,5 +1,5 @@
 <?php
-require_once dirname(dirname(__DIR__)).'/App/BaseApp.php';
+require_once dirname(dirname(__DIR__)) . '/App/BaseApp.php';
 
 use Projects\Project1\Test;
 
@@ -11,24 +11,23 @@ function main()
 
 $processConfig = array();
 global $command;
-switch ($command)
-{
-	case "a":
-		$processConfig = array(
-            "workFunction"=>"main"
-            ,"daemonize"=>false
+switch ($command) {
+    case "a":
+        $processConfig = array(
+            "workFunction" => "main"
+            , "daemonize" => false,
         );
-	    break;
+        break;
     case "b":
-	    $processConfig = array(
-            "workFunction"=>"main"
-        	,"workerNumber"=>3
-            ,"daemonize"=>true
-            ,"loopTimespan"=>2
+        $processConfig = array(
+            "workFunction" => "main"
+            , "workerNumber" => 3
+            , "daemonize" => true
+            , "loopTimespan" => 2,
         );
-	    break;
-	default:
-	    echo "Nothing to do!\n";
+        break;
+    default:
+        echo "Nothing to do!\n";
 }
 
 appStart($processConfig);
