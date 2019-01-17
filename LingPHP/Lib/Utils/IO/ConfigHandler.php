@@ -1,5 +1,5 @@
 <?php
-namespace Lib\Utility\IO;
+namespace Lib\Utils\IO;
 
 class ConfigHandler
 {

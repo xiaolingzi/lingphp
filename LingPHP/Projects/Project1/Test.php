@@ -1,7 +1,7 @@
 <?php
 namespace Projects\Project1;
 
-use Lib\Utility\IO\ConfigHandler;
+use Lib\Utils\IO\ConfigHandler;
 
 class Test
 {
