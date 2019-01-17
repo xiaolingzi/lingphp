@@ -10,7 +10,7 @@ class ConfigHandler
      */
     public static function getCommonConfig($key)
     {
-        $filename = dirname(dirname(ROOT_PATH)) . '/config/' . ENVIRONMENT . '/common_config.json';
+        $filename = dirname(dirname(ROOT_PATH)) . '/config/' . ENVIRONMENT . '/common.json';
         $result = self::getArrayFromJsonFile($filename);
         return $result[$key];
     }
@@ -22,7 +22,7 @@ class ConfigHandler
      */
     public static function getLocalConfig($key)
     {
-        $filename = ROOT_PATH . '/config/' . ENVIRONMENT . '/common_config.json';
+        $filename = ROOT_PATH . '/config/' . ENVIRONMENT . '/common.json';
         $result = self::getArrayFromJsonFile($filename);
         return $result[$key];
     }
