@@ -36,16 +36,20 @@ class ClassLoader
 
     public static function registDirectory($dir)
     {
-        if (!file_exists($dir)) {
+        $dirPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . $dir;
+
+        if (!file_exists($dirPath)) {
             return;
         }
 
-        $dirPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . $dir;
-        $filenames = scandir($dir);
+        $filenames = scandir($dirPath);
 
         foreach ($filenames as $filename) {
             $file = $dirPath . DIRECTORY_SEPARATOR . $filename;
 
+            if ($filename == "." || $filename == "..") {
+                continue;
+            }
             if (is_dir($file)) {
                 self::registNamespace($filename, $dirPath);
             }
