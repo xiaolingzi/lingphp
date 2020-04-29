@@ -1,7 +1,7 @@
 <?php
-namespace Lib\Utils\IO;
+namespace App;
 
-class ConfigHandler
+class Config
 {
     /**
      * 读取公共配置
@@ -10,7 +10,7 @@ class ConfigHandler
      */
     public static function getCommonConfig($key)
     {
-        $filename = dirname(dirname(ROOT_PATH)) . '/config/' . ENVIRONMENT . '/common.json';
+        $filename = FRAME_PATH . '/config/' . self::env("APP_ENV") . '/common.json';
         $result = self::getArrayFromJsonFile($filename);
         return $result[$key];
     }
@@ -22,7 +22,7 @@ class ConfigHandler
      */
     public static function getLocalConfig($key)
     {
-        $filename = ROOT_PATH . '/config/' . ENVIRONMENT . '/common.json';
+        $filename = ROOT_PATH . '/config/' . self::env("APP_ENV") . '/common.json';
         $result = self::getArrayFromJsonFile($filename);
         return $result[$key];
     }
@@ -43,6 +43,11 @@ class ConfigHandler
         }
         $content = file_get_contents($filename);
         return $content;
+    }
+
+    public static function env($key){
+        $name = ENV_PREFIX . strtoupper($key);
+        return getenv($name);
     }
 
 }

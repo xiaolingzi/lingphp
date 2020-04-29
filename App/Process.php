@@ -274,16 +274,19 @@ class Process
 
     private function checkProcess($processTitle)
     {
+        $processNumber = "0";
+
         if (empty($processTitle)) {
             global $command;
             $processTitle = ROOT_PATH . "/App.php -i $command";
+            $processNumber = "1";
         }
         $cmd = "ps axu|grep \"$processTitle\"|grep -v \"grep\"|wc -l";
         $result = shell_exec("$cmd");
         $result = trim($result, "\r\n");
 
         //为0则没有任何进程，考虑本进程就已经为1，只有为2才有另外的进程
-        if ($result === "1") {
+        if ($result === $processNumber) {
             return false;
         }
         return true;

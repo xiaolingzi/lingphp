@@ -2,6 +2,6 @@
     "name": "LingPHP",
     "description": "php application",
     "require": {
-        
+        "xiaolingzi/lingorm":"^2.0"
     }
 }
