@@ -46,7 +46,8 @@ class Config
     }
 
     public static function env($key){
-        $name = ENV_PREFIX . strtoupper($key);
+        // $name = ENV_PREFIX . strtoupper($key);
+        $name = strtoupper($key);
         return getenv($name);
     }
 
